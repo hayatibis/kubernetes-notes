@@ -89,7 +89,13 @@ Master machine (4 processes)
 4. etcd - key value store of a cluster state - clusterbrain
 
 
+## Minikube and Kubectl
 
+Layers of abstraction
+- Deployment manages a
+- ReplicaSet manages a
+- Pod is an abstraction of 
+- containers
 
 
 
