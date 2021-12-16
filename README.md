@@ -97,13 +97,81 @@ Layers of abstraction
 - Pod is an abstraction of 
 - containers
 
+## Kubernetes Config YAML
 
+3 parts
+1. metadata
+2. specification
+3. status (desired and actual state) (created by kubernetes)
 
+Where does K8S gets the actual status
+- etcd store them
+  
+> kubectl get pod -o wide
 
+> get status kubectl get deployment nginx-deployment -o yaml
 
+## Kubernetes Namespaces
 
+- Organise resources in namespaces
+- Virtual cluster inside a cluster
 
+4 Namespaces per default
+> kubectl get namespaces
+1. kube-system
+   - do not create or modify in kube-system
+   - system processes
+   - master and kubectl processes
+2. kube-public
+   - publicely accesible data
+   - a configmap, which contains cluster information
+   - > kubectl cluster-info
+3. kube-node-lease
+   - heartbeats of nodes 
+   - each node lease object in namespace
+   - determines the availability of a node
+4. default
+   - 
 
+Why to use namespaces?
+- no overview :(
+- resources grouped in namespaces (database, montioring, elastic stack kibana etc., nginx-ingress)
+- should not use smaller projects
+
+> avoid such kind of conflicts team namespaces
+
+- staging development namespaces
+- both use elastic and database namespace
+  
+- Blue/Green Deployment (with same resources, no need to seperate)
+
+- access and resource limits on namespaces
+- ProjectA and ProjectB namespaces isolated environment
+- Limit CPU, RAM, Storage per NS (Resource quota A, B)
+
+NOTES:
+- you cant use ProjectA configmap inside ProjectB
+- you should create for each
+- on database namespace mysql-service for instance configmap definition is mysql-service.database (database is a namespace)
+
+- volume can't be craeted within a namespace
+
+> kubens for changing namespaces (kubectx)
+
+### What is INGRESS
+
+- my-app-pod -> my-app-service (external IP, not final product)-> my-app-ingress (domain name)
+
+- You need an implementation for Ingress -> Ingress Controller (Ingress Controller Pod)
+- many-third party implementations? K8s Nginx Ingress Controller - inside k8s
+- ProxyServer ---> Ingress Controller Pod
+
+- add two rules for subdomains etc.mydomain something.mydomain
+- add two paths for to serve on same domain mydomain/etc mydomain/something
+
+- configuring TLS certificate
+- spec tls and secretName secret refet secret-tls in kubernetes tls certificate base64encoded cert and key
+- 
 
 
 
