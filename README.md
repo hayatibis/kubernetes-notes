@@ -1,13 +1,13 @@
 # kubernetes-notes
-### Overview
-#### Introduction to K8S
+## Overview
+## Introduction to K8S
 - What is Kubernetes
 - K8S Architecture
 - Main K8s Components
 - Minikube and Kubectl 
 - Main Kubectl commands & K8s CLI
 - K8S yaml
-#### Advanced Concepts
+## Advanced Concepts
 - K8s Namespaces
 - K8s Ingress
 - Helm -> Package Manager
@@ -15,8 +15,8 @@
 - K8S Stateful Set
 - K8S Services
 
-
-##### What Kubernetes is?
+---
+### What Kubernetes is?
 Open source container orchestration tool
 Helps you manage containerized applications
 
@@ -24,51 +24,71 @@ Trend from Monolith to Microservices
 - High Availability or no downtime
 - Scalability or high performance
 - Disaster recovery backup and restore
-
-##### Kubernetes Components
+---
+### Kubernetes Components
 
 **Node**
-Worker Node VM or 
+- Worker Node VM or 
 
 **Pod** 
-Smallest unit of K8s
-Abstraction over container
-Usually 1 application per pod
-Each pod gets its own IP address (New IP address on re-creation)
+- Smallest unit of K8s
+- Abstraction over container
+- Usually 1 application per pod
+- Each pod gets its own IP address (New IP address on re-creation)
 
 > You only interact with kubernetes layer
 
 **Service** 
-Permanent IP adress (pod own its service - even if pod dies service is up)
+- Permanent IP adress (pod own its service - even if pod dies service is up)
 
 **Ingress**
-Service's external access point
+- Service's external access point
 
 **ConfigMap**
-external configuration of your application (dont put sensitive info use secret)
+- external configuration of your application (dont put sensitive info use secret)
 
 **Secret**
-like as config map
-used to store secret data
-base64 encoded
+- like as config map
+- used to store secret data
+- base64 encoded
 
 > The built-in security mechanism is not enabled by default
 
 **Volumes**
-storage on local machine (node)
-or remote, outside of the k8s cluster
+- storage on local machine (node)
+- or remote, outside of the k8s cluster
 
 > K8s doesn't manage data persistance
 
 > REPLICATE EVERYTHING
 
 **StatefulSet**
-for STATEFUL apps or databases
-mongod mysql etc.
+- for STATEFUL apps or databases
+- mongod mysql etc.
 
 > DB are often hosted outside of k8s cluster
+---
+### Kubernetes Architecture
 
-##### Kubernetes Architecture
+- each Node has multiple Pods on it
+- 3 processes must be installed on every node
+- worker nodes do the actual work
+
+Worker machine (3 processes)
+
+1. container runtime
+2. kubelet - interacts with both the container and node
+3. kube-proxy - low overhead communication - smart network
+
+> Managing processes are done by Master Nodes
+
+Master machine (4 processes)
+1. api server - (cluster gateway) (acts as a gatekeeper for authentication)
+2. scheduler - scheduler just decides on which node new pod should be scheduled
+3. controller manager - detect cluster state changes
+4. etcd - key value store of a cluster state - clusterbrain
+
+
 
 
 
